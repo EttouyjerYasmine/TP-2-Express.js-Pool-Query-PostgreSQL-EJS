@@ -1,0 +1,1 @@
+// Placeholder pour scripts frontend si nécessaire

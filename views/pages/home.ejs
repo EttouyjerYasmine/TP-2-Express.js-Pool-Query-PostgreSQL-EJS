@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+
+<h1>Gestion des utilisateurs</h1>
+
+<% if (typeof error !== 'undefined' && error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<form action="/users" method="POST" class="form-add">
+  <input type="text" name="nom" placeholder="Nom" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <button type="submit">Ajouter</button>
+</form>
+
+<% if (users.length) { %>
+  <ul class="user-list">
+    <% users.forEach(u => { %>
+      <li>
+        <form action="/users/<%= u.id %>/edit" method="POST" class="form-inline">
+          <input name="nom"   value="<%= u.nom %>"  required>
+          <input name="email" value="<%= u.email %>" required>
+          <button type="submit">✎</button>
+        </form>
+        <form action="/users/<%= u.id %>/delete" method="POST" class="form-inline">
+          <button type="submit">🗑️</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>Aucun utilisateur trouvé.</p>
+<% } %>
+
+<%- include('../partials/footer') %>
